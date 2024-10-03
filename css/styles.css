@@ -1,0 +1,276 @@
+/* https://www.svgrepo.com/collection/basic-hand-gestures-fill/ */
+body {
+  font-family: roboto;
+  text-shadow: 0 .05rem .1rem rgb(0 0 0 / 50%);
+}
+
+video {
+  display: none;
+}
+
+.board-canvas {
+  position: absolute; 
+  left: 0px; 
+  top: 0px;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 3;
+}
+
+.modal {
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-width: 4px;
+  border-radius: 0.5rem;
+  border-color: rgb(0 255 255 / 1);
+  background-color: #000;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+#console {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  overflow-x: hidden;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  z-index: 1;
+}
+
+.console-wrap {
+  position: fixed;
+  left: -33%;
+  width: 33%;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
+  color: #8b8b8b;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  font-family: "Liberation Mono", monospace;
+}
+
+#console.open {
+  left: 33%;
+}
+
+#console.open .console-wrap {
+  left: 0;
+}
+
+.console-wrap::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+.console-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.console-wrap::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: rgb(0, 200, 81, 0.678); 
+}
+
+.console-line:last-child {
+  color: #fff;
+  font-weight: bold;
+  animation: fadeIn 1.2s;
+}
+
+.console-line:last-child .text-solver {
+  white-space: pre-line;
+}
+
+.console-line:last-child .text-solver math {
+  font-size: 1.5rem;
+}
+
+.text-green {
+  color: #0f0;
+}
+
+.d-none {
+  display: none!important;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 1.3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  min-width: 80px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+  font-family: roboto;
+  text-shadow: 0 .05rem .1rem rgb(0 0 0 / 50%);
+}
+
+button img {
+  margin-bottom: 10px;
+}
+
+.hex {
+  aspect-ratio: cos(30deg);
+  /* notice how I simply switched the x/y from the previous polygon, easy! */
+  clip-path: polygon(-50% 50%,50% 100%,150% 50%,50% 0);
+  background: linear-gradient(45deg, #3d3d3d, #000000);
+  transition: transform .2s; /* Animation */
+  min-width: 120px;
+}
+
+.hex.active, .hex:hover {
+  background: linear-gradient(45deg, #ffffff, #bbbbbb);
+  transform: scale(.875);
+  color: #000;
+}
+
+.hex.active img, .hex:hover img {
+  filter: invert(100%);
+}
+
+.menu {
+  position: fixed;
+  left: 50%;
+  bottom: 5%;
+  transform: translate(-50%, 0%);
+  z-index: 2;
+}
+
+.menu ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.menu li {
+  margin-right: 1.875rem; /* optional, adds space between items */
+}
+
+.menu-drawing {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.menu-drawing ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.menu-drawing li {
+  margin-bottom: 1.875rem; /* optional, adds space between items */
+}
+
+.center {
+  position: fixed;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#loader {
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 30px;
+  animation: l1 1s linear infinite alternate;
+}
+
+#loader:before {
+  content:"Cargando..."
+}
+
+#enable-webcam {
+  background-color: #FFFFFF;
+  border: 1px solid #222222;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 1.5rem;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+  user-select: none;
+  width: auto;
+}
+
+#enable-webcam:active {
+  background-color: #F7F7F7;
+  border-color: #000000;
+  transform: scale(.96);
+}
+
+@media screen and (max-height: 450px) {
+  #console {padding-top: 15px;}
+  #console .console-line {font-size: 18px;}
+}
+
+@keyframes l1 {
+  to { opacity: 0 }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="css/reset.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="center">
+    <div id="loader"></div>
+    <button class="d-none" id="enable-webcam">Habilitar cámara web</button>
+  </div>
+
+  <div id="canvas-container">
+    <video id="webcam" autoplay playsinline></video>
+    <canvas class="board-canvas" id="output-canvas"></canvas>
+    <canvas class="board-canvas" id="drawing-canvas"></canvas>
+  </div>
+
+  <div id="console">
+    <button class="hex" id="close-button"><img src="img/close.svg" alt="open" width="48"><span>Abrir</span></button>
+    <button class="d-none hex" id="open-button"><img src="img/close.svg" alt="close" width="48"><span>Cerrar</span></button>
+    <div class="console-wrap">
+      <div class="console-line">
+        <span class="text-green">></span> 
+        <span class="text-solver">Interfaz inicializada</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li><button class="hex" id="solver-button"><img src="img/iLoveYou.svg" alt="solver" width="48"><span>Solucionar</span></button></li>
+      <li><button class="hex" id="erase-button"><img src="img/erase.svg" alt="erase" width="48"><span>Borrar</span></button></li>
+      <!--li><button class="hex" id="clear-button"><img src="img/victory.svg" alt="clear" width="48"><span>Limpiar</span></button></li-->
+    </ul>
+  </div>
+
+  <div class="menu-drawing">
+    <ul>
+      <li><button class="hex" id="pinch-button"><img src="img/pinch.svg" alt="pinch" width="48"><span>Dibujar</span></button></li>
+      <li><button class="hex" id="two-finger-button"><img src="img/scissors.svg" alt="scissors" width="48"><span>Dibujar</span></button></li>
+    </ul>
+  </div>
+
+  <div class="modal-container d-none" id="confirmation">
+    <div class="modal modal-text">
+        <p>¿Solucionar operación?</p>
+        <div class="modal-footer">
+          <button class="modal-button"><img src="img/dislike.svg" alt="dislike" width="48"><span>No</span></button>
+          <button class="modal-button"><img src="img/like.svg" alt="like" width="48"><span>Si</span></button>
+        </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>
