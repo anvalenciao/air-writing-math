@@ -7,7 +7,7 @@ import { TerminalConsole } from './terminalConsole.js';
 // Initialize gesture detectors with thresholds
 const pinchDetector = new PinchGestureDetector(0.15); 
 const scissorsDetector = new ScissorsGestureDetector(0.12);
-const dwellDetector = new DwellGestureDetector(600, 0.03);
+const dwellDetector = new DwellGestureDetector(600, 0.02);
 
 // --------------------- Terminal Console Setup --------------------------------
 // Initialize terminal console for logging and results
@@ -329,10 +329,11 @@ async function runGemini(imgData) {
   terminalConsole.showConsole();
   terminalConsole.cloneAndAppendConsoleLine('Analizando operación ...'); 
 
-  const prompt = "Resuelve este problema de matemáticas, agrega al principio la operación reconocida seguida de un simbolo de igual, convierte la operación y el resultado en MathML";
+  const prompt = "Resuelve este problema de matemáticas, agrega al principio la operación reconocida, luego el resultado de la operación, convierte la operación y el resultado en MathML";
 
   // Remove the data URL prefix
-  const strImage = imgData.replace(/^data:image\/[a-z]+;base64,/, ""); 
+  const strImage = imgData.replace(/^data:image\/[a-z]+;base64,/, "");
+  console.log(strImage);
 
   try {
     const result = await model.generateContent([prompt, {

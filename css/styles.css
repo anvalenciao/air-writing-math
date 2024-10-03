@@ -122,6 +122,11 @@ video {
 
 .console-line:last-child .text-solver math {
   font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.console-line:last-child .text-solver math:last-child {
+  font-weight: bold;
 }
 
 .text-green {
