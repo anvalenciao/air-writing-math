@@ -5,7 +5,7 @@ import { TerminalConsole } from './terminalConsole.js';
 
 // --------------------- Gesture Recognition Setup ------------------------------
 // Initialize gesture detectors with thresholds
-const pinchDetector = new PinchGestureDetector(0.15); 
+const pinchDetector = new PinchGestureDetector(0.20); 
 const scissorsDetector = new ScissorsGestureDetector(0.12);
 const dwellDetector = new DwellGestureDetector(600, 0.02);
 
