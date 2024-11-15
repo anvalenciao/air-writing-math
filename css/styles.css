@@ -122,7 +122,6 @@ video {
 
 .console-line:last-child .text-solver math {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
 }
 
 .console-line:last-child .text-solver math:last-child {
@@ -264,6 +263,33 @@ button img {
   background-color: #F7F7F7;
   border-color: #000000;
   transform: scale(.96);
+}
+
+.stopwatch-container {
+  position: fixed;
+  left: 2%;
+  bottom: 5%;
+  transform: translate(2%, 0%);
+  z-index: 2;
+  color: darkgray;
+}
+
+.stopwatch {
+  margin-top: 1.5rem;
+}
+
+.stopwatch > span {
+  display: block;
+  font-size: 0.8rem;
+}
+
+.time {
+  display: inline-block;
+  font-size: 1.5em;
+}
+
+.total-seconds {
+  font-size: 1em;
 }
 
 @media screen and (max-height: 450px) {

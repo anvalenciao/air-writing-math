@@ -2,6 +2,7 @@ import { GestureRecognizer, FilesetResolver, DrawingUtils } from 'https://cdn.js
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { PinchGestureDetector, ScissorsGestureDetector, DwellGestureDetector } from './gestureDetector.js';
 import { TerminalConsole } from './terminalConsole.js';
+import { Stopwatch } from './stopwatch.js';
 
 // --------------------- Gesture Recognition Setup ------------------------------
 // Initialize gesture detectors with thresholds
@@ -54,6 +55,22 @@ const defaultEraseSize = 12;
 let eraseSize = defaultEraseSize;
 let lastX = 0;
 let lastY = 0;
+
+const stopwatch1 = new Stopwatch({
+  hours: document.getElementById('hours1'),
+  minutes: document.getElementById('minutes1'),
+  seconds: document.getElementById('seconds1'),
+  milliseconds: document.getElementById('milliseconds1'),
+  totalSeconds: document.getElementById('total-seconds1')
+});
+
+const stopwatch2 = new Stopwatch({
+  hours: document.getElementById('hours2'),
+  minutes: document.getElementById('minutes2'),
+  seconds: document.getElementById('seconds2'),
+  milliseconds: document.getElementById('milliseconds2'),
+  totalSeconds: document.getElementById('total-seconds2')
+});
 
 /**
  * Sets the dimensions of the given canvas elements to match the window size.
@@ -198,6 +215,9 @@ async function predictWebcam() {
     drawingCtx.strokeStyle = '#00ff00'; 
     drawingCtx.lineWidth = 6;
     drawingCtx.stroke(); 
+
+    stopwatch1.start();
+    stopwatch2.start();
   } else {
     // Reset the sound effect flag if not drawing
     soundChalkStrike = true;  
@@ -327,9 +347,13 @@ function getRotatedCanvasData(canvas) {
  */
 async function runGemini(imgData) {
   terminalConsole.showConsole();
+  terminalConsole.cloneAndAppendConsoleLine(`T: ${Math.floor(stopwatch1.totalMilliseconds / 1000)}.${stopwatch1.totalMilliseconds % 1000}`); 
   terminalConsole.cloneAndAppendConsoleLine('Analizando operación ...'); 
 
-  const prompt = "Resuelve este problema de matemáticas, agrega al principio la operación reconocida, luego el resultado de la operación, convierte la operación y el resultado en MathML";
+  // const prompt = "Resuelve este problema de matemáticas, agrega al principio la operación reconocida, luego el resultado de la operación, convierte la operación y el resultado en MathML";
+  const prompt = "Analiza y resuelve el siguiente problema matemático. Primero, muestra la operación reconocida, seguida del resultado de la operación, todo en un solo bloque MathML";
+  //const prompt = "Analiza y resuelve el siguiente problema matemático. Presenta la operación completa en un solo bloque MathML, incluyendo el símbolo igual (=) seguido del resultado.";
+
 
   // Remove the data URL prefix
   const strImage = imgData.replace(/^data:image\/[a-z]+;base64,/, "");
@@ -345,6 +369,8 @@ async function runGemini(imgData) {
     const response = await result.response;
     const text = response.text();
     console.log(text); // Log the response from Gemini
+    terminalConsole.cloneAndAppendConsoleLine(`T: ${Math.floor(stopwatch1.totalMilliseconds / 1000)}.${stopwatch1.totalMilliseconds % 1000}`); 
+    stopwatch1.reset();
     terminalConsole.cloneAndAppendConsoleLine(text); // Display the response in the console
   } catch (error) {
     console.error("Error calling Gemini API:", error);
