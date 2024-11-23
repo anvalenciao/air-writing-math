@@ -350,8 +350,10 @@ async function runGemini(imgData) {
   terminalConsole.cloneAndAppendConsoleLine(`T: ${Math.floor(stopwatch1.totalMilliseconds / 1000)}.${stopwatch1.totalMilliseconds % 1000}`); 
   terminalConsole.cloneAndAppendConsoleLine('Analizando operación ...'); 
 
-  // const prompt = "Resuelve este problema de matemáticas, agrega al principio la operación reconocida, luego el resultado de la operación, convierte la operación y el resultado en MathML";
-  const prompt = "Analiza y resuelve el siguiente problema matemático. Primero, muestra la operación reconocida, seguida del resultado de la operación, todo en un solo bloque MathML";
+  //const prompt = "Resuelve este problema de matemáticas, agrega al principio la operación reconocida, luego el resultado de la operación, convierte la operación y el resultado en MathML";
+  // const prompt = "Analiza y resuelve el siguiente problema matemático. Primero, muestra la operación reconocida, seguida del resultado de la operación, todo en un solo bloque MathML";
+  //const prompt = "Please analyze the following image of a handwritten mathematical problem. Identify the mathematical operation present in the image and solve it. Then, output both the recognized operation and the result in a single MathML block. Make sure the MathML is formatted correctly for clear interpretation of the operation and its solution, without any additional text, explanations, or XML tags.";
+  const prompt = "Analice la imagen proporcionada que contiene una operación matemática escrita a mano. Reconozca con precisión la operación matemática y resuélvala. Devuelva únicamente el bloque MathML que incluye tanto la operación reconocida como el resultado final. No agregue texto adicional, explicaciones, etiquetas de código, ni formato como ```xml. Proporcione exclusivamente el bloque MathML limpio.";
   //const prompt = "Analiza y resuelve el siguiente problema matemático. Presenta la operación completa en un solo bloque MathML, incluyendo el símbolo igual (=) seguido del resultado.";
 
 
